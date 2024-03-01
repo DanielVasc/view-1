@@ -50,7 +50,7 @@ const nome = 'Daniel'
 const idade = 16
 
 function inverter(texto) {
-  return texto.split('').reverse().join('')
+  return texto.split('').reverse().join('').toUpperCase()
 }
 
 function saudacao() {
@@ -61,9 +61,19 @@ function incrementar() {
   contador.value++;
 }
 
+function incrementar10() {
+  contador.value+= 10;
+}
+
 function decrementar() {
   if (contador.value > 0) {
     contador.value--;
+  }
+}
+
+function decrementar10() {
+  if (contador.value > 0) {
+    contador.value-=10;
   }
 }
 
@@ -71,16 +81,10 @@ function reiniciar() {
   contador.value = 0;
 }
 
-function maior(){
-  if(contador > 10){
-  
-  }
-}
-
 </script>
 
 <template>
-
+  <div class="bloco">
   <div class="info">
     <h1>Exemplo 1 - Mostrando informações na tela</h1>
     <p>Nome: {{ nome }} </p>
@@ -95,17 +99,28 @@ function maior(){
   </div>
 
   <div class="contador">
-    <h1>Contador</h1>
-    <p :color="red"> {{ contador }} </p>
-    <button @click="incrementar">Incrementar</button>
-    <button @click="decrementar">Decrementar</button>
-    <button @click="reiniciar">Reiniciar</button>
+  <div v-if="contador < 10" class="vermelho">
+      <h1>Contador</h1>
+      <p :color="red"> {{ contador }} </p>
+      <button @click="incrementar10">+10</button>
+      <button @click="incrementar">+1</button>
+      <button @click="decrementar">-1</button>
+      <button @click="decrementar10">-10</button>
+      <button @click="reiniciar">Reiniciar</button>
+    </div>
+
+    <div v-else="contador > 10" class="verde">
+      <h1>Contador</h1>
+      <p :color="red"> {{ contador }} </p>
+      <button @click="incrementar10">+10</button>
+      <button @click="incrementar">+1</button>
+      <button @click="decrementar">-1</button>
+      <button @click="decrementar10">-10</button>
+      <button @click="reiniciar">Reiniciar</button>
+    </div>
   </div>
-
+</div>
 </template>
-
-
-   
 
 <style scoped>
 .info {
@@ -116,13 +131,12 @@ function maior(){
 }
 
 .contador {
-  background-color: rgba(35, 12, 22, 1);
   padding: 20px 30px;
   color: rgb(183, 210, 219);
   border-radius: 10px;
 }
 
-.contador p{
+.contador p {
   color: aliceblue;
 }
 
@@ -130,5 +144,19 @@ h1 {
   color: white;
   font-weight: bold;
   font-size: 1.5em;
+}
+
+.vermelho {
+  background-color: rgb(153, 9, 9);
+  padding: 20px 30px;
+  color: rgb(183, 210, 219);
+  border-radius: 10px;
+}
+
+.verde {
+  background-color: rgb(50, 143, 7);
+  padding: 20px 30px;
+  color: rgb(183, 210, 219);
+  border-radius: 10px;
 }
 </style>
